@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "CUIT")
     private Long CUIT;
 
     private String name;
