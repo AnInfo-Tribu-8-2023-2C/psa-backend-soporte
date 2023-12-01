@@ -44,7 +44,7 @@ public class TicketService implements ITicketService {
     public MessageDTO deleteTicketById(Long id) {
         try {
             ticketRepository.deleteById(id);
-            return new MessageDTO(String.format("Delete ticket with id: %d success", id));
+            return new MessageDTO(/*String.format("Delete ticket with id: %d success", id)*/);
         } catch (Exception e) {
             throw new NotFoundException("Ticket not found");
         }

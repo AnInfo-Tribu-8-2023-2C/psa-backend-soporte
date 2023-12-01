@@ -44,7 +44,7 @@ public class TaskService implements ITaskService{
     public MessageDTO deleteTaskById(Long id) {
         try {
             taskRepository.deleteById(id);
-            return new MessageDTO(String.format("Delete task with id: %d success", id));
+            return new MessageDTO(/*String.format("Delete task with id: %d success", id)*/);
         } catch (Exception e) {
             throw new NotFoundException("Task not found");
         }
