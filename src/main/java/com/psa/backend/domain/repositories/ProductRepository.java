@@ -1,9 +1,9 @@
 package com.psa.backend.domain.repositories;
 
-import com.psa.backend.domain.entities.Ticket;
+import com.psa.backend.domain.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }
