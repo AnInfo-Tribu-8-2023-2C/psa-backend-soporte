@@ -2,13 +2,11 @@ package com.psa.backend.domain.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import java.util.Date;
 
 @Entity
-public class Product {
+public class Collaborator {
     @Id
-    private int idProduct;
+    private Integer idCollaborator;
     private String name;
-    private String description;
-    private Date creationDate;
+    private String workPosition;
 }
