@@ -2,6 +2,7 @@ package com.psa.backend.domain.services;
 
 import com.psa.backend.domain.entities.Ticket;
 import com.psa.backend.domain.repositories.TicketRepository;
+import com.psa.backend.domain.services.ITicketTaskService;
 import com.psa.backend.domain.handlers.NotFoundException;
 import com.psa.backend.domain.dto.MessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class TicketService implements ITicketService {
 
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private ITicketTaskService ticketTaskService;
 
     @Override
     public Collection<Ticket> getTickets() {
@@ -48,5 +52,10 @@ public class TicketService implements ITicketService {
         } catch (Exception e) {
             throw new NotFoundException("Ticket not found");
         }
+    }
+
+    @Override
+    public void associateTask(Long ticketId, Long taskId) {
+        ticketTaskService.createTicketTask(ticketId, taskId);
     }
 }
