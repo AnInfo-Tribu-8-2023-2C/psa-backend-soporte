@@ -1,9 +1,10 @@
 package com.example.backend.domain.services;
 
-import com.example.backend.domain.dto.MessageDTO;
 import com.example.backend.domain.entities.Ticket;
-import com.example.backend.domain.handlers.NotFoundException;
 import com.example.backend.domain.repositories.TicketRepository;
+
+import com.example.backend.domain.handlers.NotFoundException;
+import com.example.backend.domain.dto.MessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,11 +40,10 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public void saveTicket(Ticket ticket) {
-        ticketRepository.save(ticket);
+    public Ticket updateTicket(Ticket ticket, Long id) {
+        Ticket selectedTicket = getTicketById(id);
+        return ticketRepository.save(selectedTicket);
     }
-
-
 
     @Override
     public MessageDTO deleteTicketById(Long id) {

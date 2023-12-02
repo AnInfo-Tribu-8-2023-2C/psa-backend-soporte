@@ -1,43 +1,13 @@
 package com.example.backend;
 
-import com.example.backend.domain.dto.MessageDTO;
-import com.example.backend.domain.entities.*;
-import com.example.backend.domain.services.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @SpringBootApplication
 public class BackendApplication {
-	@Autowired
-	private IProductService productService;
-
-	@Autowired
-	private IProductVersionService productVersionService;
-
-	@Autowired
-	private ITicketService ticketService;
-
-	@Autowired
-	private ITaskService taskService;
-
-	@Autowired
-	private IClientService clientService;
-
-	@Autowired
-	private ICollaboratorService collaboratorService;
-
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}
@@ -45,7 +15,7 @@ public class BackendApplication {
 
 	// ------------------------------------------------PRODUCTS----------------------------------------------------
 // ------------------------------------------------------------------------------------------------------------
-	@GetMapping("/products")
+	/*@GetMapping("/products")
 	public Collection<Product> gqetProducts() {
 		return productService.getProducts();
 	}
@@ -110,7 +80,7 @@ public class BackendApplication {
 		try {
 			ticketService.getTicketById(id);
 			ticket.setId(id);
-			ticketService.saveTicket(ticket);
+			ticketService.saveTicket(ticket, id);
 			return ResponseEntity.ok().build();
 		} catch (RuntimeException e) {
 			return ResponseEntity.notFound().build();
@@ -183,5 +153,5 @@ public class BackendApplication {
 	@GetMapping("/collaborators/{id}")
 	public Collaborator getCollaboratorById(@PathVariable Long id) {
 		return collaboratorService.getCollaboratorById(id);
-	}
+	}*/
 }
