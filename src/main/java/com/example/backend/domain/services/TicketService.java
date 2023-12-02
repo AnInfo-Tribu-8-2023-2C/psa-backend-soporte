@@ -20,10 +20,10 @@ public class TicketService implements ITicketService {
  //   @Autowired
  //   private ITicketTaskService ticketTaskService;
 
-    @Override
-    public Ticket createTicket(Ticket ticket) {
-        return ticketRepository.save(ticket);
-    }
+   // @Override
+   // public Ticket createTicket(Ticket ticket) {
+   //     return ticketRepository.save(ticket);
+   // }
 
     @Override
     public Collection<Ticket> getTickets() {
@@ -37,6 +37,11 @@ public class TicketService implements ITicketService {
             throw new NotFoundException(String.format("Ticket with id: %d not found", id));
         }
         return ticketOptional.get();
+    }
+
+    @Override
+    public Ticket save(Ticket ticket) {
+        return ticketRepository.save(ticket);
     }
 
     @Override

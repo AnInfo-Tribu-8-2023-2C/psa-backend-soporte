@@ -9,9 +9,11 @@ public interface ITicketService {
 
     public Collection<Ticket> getTickets();
 
-    public Ticket createTicket(Ticket ticket);
+   // public Ticket createTicket(Ticket ticket);
 
     public Ticket getTicketById(Long id);
+
+    public Ticket save(Ticket ticket);
 
     public Ticket updateTicket(Ticket ticket, Long id);
 

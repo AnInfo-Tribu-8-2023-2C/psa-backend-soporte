@@ -13,6 +13,8 @@ public interface ITaskService {
 
     public Task getTaskById(Long id);
 
+    public Task save(Task task);
+
     public Task updateTask(Task task, Long id);
 
     public MessageDTO deleteTaskById(Long id);
