@@ -8,7 +8,6 @@ import java.util.List;
 
 import lombok.*;
 
-@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,6 +38,10 @@ public class Ticket {
             joinColumns = @JoinColumn(name = "ticket_id"),
             inverseJoinColumns = @JoinColumn(name = "task_id"))
     private List<Task> listLinkedTasks = new ArrayList<>();
+
+    public List<Task> getListLinkedTasks() {
+        return listLinkedTasks;
+    }
 
     public void setId(Long id) {
         this.id = id;

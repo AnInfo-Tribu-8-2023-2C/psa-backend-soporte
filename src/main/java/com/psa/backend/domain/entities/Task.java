@@ -11,7 +11,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,4 +35,8 @@ public class Task {
 
     @ManyToMany(mappedBy = "listLinkedTasks")
     private List<Ticket> listLinkedTickets = new ArrayList<>();
+
+    public List<Ticket> getListLinkedTickets() {
+        return listLinkedTickets;
+    }
 }
