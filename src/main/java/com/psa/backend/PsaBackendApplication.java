@@ -16,6 +16,7 @@ import com.psa.backend.domain.services.ICollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -99,6 +100,19 @@ public class PsaBackendApplication {
 			ticket.setId(id);
 			ticketService.saveTicket(ticket);
 			return ResponseEntity.ok().build();
+		} catch (RuntimeException e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@PutMapping("/tickets/{idTicket}/link-task/{idTask}")
+	public ResponseEntity<Ticket> linkTask(@PathVariable Long idTicket, @PathVariable Long idTask) {
+		try {
+			 Ticket ticket = ticketService.getTicketById(idTicket);
+			 Task task = taskService.getTaskById(idTask);
+			 ticket.getListLinkedTasks().add(task);
+			 task.getListLinkedTickets().add(ticket);
+			 return ResponseEntity.ok().build();
 		} catch (RuntimeException e) {
 			return ResponseEntity.notFound().build();
 		}

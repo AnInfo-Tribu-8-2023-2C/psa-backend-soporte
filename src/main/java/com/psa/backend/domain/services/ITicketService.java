@@ -2,6 +2,8 @@ package com.psa.backend.domain.services;
 
 import com.psa.backend.domain.dto.MessageDTO;
 import com.psa.backend.domain.entities.Ticket;
+import org.springframework.http.ResponseEntity;
+
 import java.util.Collection;
 
 public interface ITicketService {
