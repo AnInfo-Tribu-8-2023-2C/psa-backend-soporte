@@ -1,7 +1,11 @@
 package com.psa.backend.domain.entities;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,4 +33,7 @@ public class Task {
     private Date creationDate;
 
     //private int severity;
+
+    @ManyToMany(mappedBy = "listLinkedTasks")
+    private List<Ticket> listLinkedTickets = new ArrayList<>();
 }

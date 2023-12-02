@@ -16,6 +16,7 @@ import com.psa.backend.domain.services.ICollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -47,6 +48,9 @@ public class PsaBackendApplication {
 		SpringApplication.run(PsaBackendApplication.class, args);
 	}
 
+
+// ------------------------------------------------PRODUCTS----------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 	@GetMapping("/products")
 	public Collection<Product> getProducts() {
 		return productService.getProducts();
@@ -57,6 +61,9 @@ public class PsaBackendApplication {
 		return productService.getProductById(id);
 	}
 
+
+// ------------------------------------------PRODUCT VERSIONS--------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 	@GetMapping("/products/{productId}/versions")
 	public Collection<ProductVersion> getProductVersions(@PathVariable Long productId) {
 		return productVersionService.getProductVersions(productId);
@@ -67,24 +74,45 @@ public class PsaBackendApplication {
 		return productVersionService.getVersionById(id);
 	}
 
+
+// -------------------------------------------TICKETS----------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
+	@PostMapping("/tickets")
+	public Ticket createTicket(@RequestBody Ticket ticket) {
+		return ticketService.createTicket(ticket);
+	}
+
 	@GetMapping("/tickets")
 	public Collection<Ticket> getTickets() {
 		return ticketService.getTickets();
 	}
-
-	//CREATE TICKET
 
 	@GetMapping("/tickets/{id}")
 	public Ticket getTicketById(@PathVariable Long id) {
 		return ticketService.getTicketById(id);
 	}
 
-	//SAVE TICKET
+	@PutMapping("/tickets/{id}")
+	public ResponseEntity<Ticket> updateTicket(@RequestBody Ticket ticket, @PathVariable Long id) {
+		try {
+			ticketService.getTicketById(id);
+			ticket.setId(id);
+			ticketService.saveTicket(ticket);
+			return ResponseEntity.ok().build();
+		} catch (RuntimeException e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
+	// No se si deberian poder borrarse los Tickets
 	@DeleteMapping("/tickets/{id}")
 	public MessageDTO deleteTicketById(@PathVariable Long id) {
 		return ticketService.deleteTicketById(id);
 	}
+
+
+// -----------------------------------------------TASKS--------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 
 	@GetMapping("/tasks")
 	public Collection<Task> getTasks() {
@@ -105,6 +133,9 @@ public class PsaBackendApplication {
 		return taskService.deleteTaskById(id);
 	}
 
+
+// -------------------------------------------------CLIENTS----------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 	@GetMapping("/clients")
 	public Collection<Client> getClients() {
 		return clientService.getClients();
@@ -115,6 +146,9 @@ public class PsaBackendApplication {
 		return clientService.getClientByCUIT(cuit);
 	}
 
+
+// ---------------------------------------------COLLABORATORS--------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 	@GetMapping("/collaborators")
 	public Collection<Collaborator> getCollaborators() {
 		return collaboratorService.getCollaborators();
@@ -125,3 +159,6 @@ public class PsaBackendApplication {
 		return collaboratorService.getCollaboratorById(id);
 	}
 }
+
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------

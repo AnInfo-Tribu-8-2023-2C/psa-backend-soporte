@@ -1,11 +1,12 @@
 package com.psa.backend.domain.entities;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.List;
+
+import lombok.*;
 
 @Getter
 @Builder
@@ -31,4 +32,15 @@ public class Ticket {
     private Date creationDate;
 
     private int severity;
+
+    @ManyToMany
+    @JoinTable(
+            name = "ticket_task",
+            joinColumns = @JoinColumn(name = "ticket_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id"))
+    private List<Task> listLinkedTasks = new ArrayList<>();
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -1,3 +1,4 @@
+/*
 package com.psa.backend.domain.services;
 
 import com.psa.backend.domain.entities.TicketTask;
@@ -34,7 +35,7 @@ public class TicketTaskService implements ITicketTaskService {
     public MessageDTO deleteByTicketId(Long ticketId) {
         try {
             ticketTaskRepository.deleteByTicketId(ticketId);
-            return new MessageDTO(/*String.format("Delete TicketTask with id: %d success", id)*/);
+            return new MessageDTO(String.format("Delete TicketTask with id: %d success", ticketId));
         } catch (Exception e) {
             throw new NotFoundException("TicketTask not found");
         }
@@ -44,9 +45,11 @@ public class TicketTaskService implements ITicketTaskService {
     public MessageDTO deleteByTaskId(Long taskId) {
         try {
             ticketTaskRepository.deleteByTaskId(taskId);
-            return new MessageDTO(/*String.format("Delete TicketTask with id: %d success", id)*/);
+            return new MessageDTO(String.format("Delete TicketTask with id: %d success", taskId));
         } catch (Exception e) {
             throw new NotFoundException("TicketTask not found");
         }
     }
 }
+
+ */

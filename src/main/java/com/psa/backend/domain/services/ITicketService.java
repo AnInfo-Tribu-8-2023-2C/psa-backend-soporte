@@ -16,5 +16,5 @@ public interface ITicketService {
 
     public MessageDTO deleteTicketById(Long id);
 
-    public void associateTask(Long ticketId, Long taskId);
+   // public void associateTask(Long ticketId, Long taskId);
 }

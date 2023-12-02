@@ -1,3 +1,4 @@
+/*
 package com.psa.backend.domain.repositories;
 
 import com.psa.backend.domain.entities.TicketTask;
@@ -17,3 +18,5 @@ public interface TicketTaskRepository extends JpaRepository<TicketTask, Long> {
 
     void deleteByTaskId(Long taskId);
 }
+
+ */

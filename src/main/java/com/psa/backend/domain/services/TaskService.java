@@ -2,7 +2,6 @@ package com.psa.backend.domain.services;
 
 import com.psa.backend.domain.dto.MessageDTO;
 import com.psa.backend.domain.repositories.TaskRepository;
-import com.psa.backend.domain.services.ITicketTaskService;
 import com.psa.backend.domain.handlers.NotFoundException;
 import com.psa.backend.domain.entities.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ public class TaskService implements ITaskService{
     @Autowired
     TaskRepository taskRepository;
 
-    @Autowired
-    private ITicketTaskService ticketTaskService;
 
     @Override
     public Collection<Task> getTasks() {
@@ -48,14 +45,15 @@ public class TaskService implements ITaskService{
     public MessageDTO deleteTaskById(Long id) {
         try {
             taskRepository.deleteById(id);
-            return new MessageDTO(/*String.format("Delete task with id: %d success", id)*/);
+            return new MessageDTO(String.format("Delete task with id: %d success", id));
         } catch (Exception e) {
             throw new NotFoundException("Task not found");
         }
     }
 
-    @Override
-    public void associateTicket(Long ticketId, Long taskId) {
-        ticketTaskService.createTicketTask(ticketId, taskId);
-    }
+//    @Override
+//    public void associateTicket(Long ticketId, Long taskId) {
+//        ticketTaskService.createTicketTask(ticketId, taskId);
+//    }
+
 }

@@ -1,3 +1,4 @@
+/*
 package com.psa.backend.domain.entities;
 
 import jakarta.persistence.*;
@@ -11,18 +12,19 @@ import java.io.Serializable;
 @Entity
 public class TicketTask {
     @Id
-    @Column(name = "ticket_id")
-    private Long ticketId;
+    @Column(name = "idlol")
+    private Long idlol;
 
-    @Id
-    @Column(name = "task_id")
-    private Long taskId;
+    //@Id
+   //@Column(name = "task_id")
+    private Long idlel;
 
     public TicketTask() {
     }
 
     public TicketTask(Long ticketId, Long taskId) {
-        this.ticketId = ticketId;
-        this.taskId = taskId;
+        this.idlol = ticketId;
+        this.idlel = taskId;
     }
 }
+*/

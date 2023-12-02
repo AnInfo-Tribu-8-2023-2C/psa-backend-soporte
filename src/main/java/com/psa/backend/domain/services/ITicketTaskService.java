@@ -1,3 +1,4 @@
+/*
 package com.psa.backend.domain.services;
 
 import com.psa.backend.domain.dto.MessageDTO;
@@ -15,3 +16,5 @@ public interface ITicketTaskService {
 
     public MessageDTO deleteByTaskId(Long taskId);
 }
+
+ */
