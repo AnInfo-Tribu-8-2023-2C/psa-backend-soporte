@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +30,9 @@ public class Ticket {
 
     private String state;
 
-    private Date creationDate;
+    @CreationTimestamp
+    @Column(name = "creationDate")
+    private Date createdAt;
 
     private int severity;
 

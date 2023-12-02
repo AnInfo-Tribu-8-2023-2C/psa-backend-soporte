@@ -13,7 +13,7 @@ public interface ITicketService {
 
     public Ticket getTicketById(Long id);
 
-    public void saveTicket(Ticket ticket);
+    public Ticket updateTicket(Ticket ticket, Long id);
 
     public MessageDTO deleteTicketById(Long id);
 
