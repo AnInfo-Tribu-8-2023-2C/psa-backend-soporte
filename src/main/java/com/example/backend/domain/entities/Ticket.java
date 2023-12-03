@@ -36,6 +36,8 @@ public class Ticket {
 
     private int severity;
 
+    //Comentarios, historial de comentarios
+
     @ManyToMany
     @JoinTable(
             name = "ticket_task",
