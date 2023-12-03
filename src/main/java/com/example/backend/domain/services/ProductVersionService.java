@@ -20,6 +20,10 @@ public class ProductVersionService implements IProductVersionService {
     ITicketService ticketService;
 
     @Override
+    public ProductVersion save(ProductVersion productVersion) {
+        return productVersionRepository.save(productVersion);
+    }
+    @Override
     public List<ProductVersion> getProductVersions(Long productId) {
         return productVersionRepository.findByProductId(productId);
     }
