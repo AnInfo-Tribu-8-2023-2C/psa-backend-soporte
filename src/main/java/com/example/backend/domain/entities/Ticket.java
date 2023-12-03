@@ -1,18 +1,17 @@
 package com.example.backend.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Ticket {
     @Id
@@ -45,11 +44,4 @@ public class Ticket {
             inverseJoinColumns = @JoinColumn(name = "task_id"))
     private List<Task> listLinkedTasks = new ArrayList<>();
 
-    public List<Task> getListLinkedTasks() {
-        return listLinkedTasks;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
