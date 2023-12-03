@@ -21,7 +21,7 @@ public class Client {
 
     private int type;
 
-    private int razonSocial;
+    private int businessName;
 
     private int phoneNumber;
 }
