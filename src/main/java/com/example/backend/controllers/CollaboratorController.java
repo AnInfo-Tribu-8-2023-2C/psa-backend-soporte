@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
 import com.example.backend.domain.services.ICollaboratorService;
-import com.psa.backend.domain.entities.Collaborator;
+import com.example.backend.domain.entities.Collaborator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
