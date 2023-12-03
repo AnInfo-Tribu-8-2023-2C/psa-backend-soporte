@@ -24,10 +24,10 @@ public class ProductVersionController {
     @Autowired
     private IProductService productService;
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<?> getProductVersions(@PathVariable Long productId) {
         return new ResponseEntity<>(productVersionService.getProductVersions(productId), HttpStatus.OK);
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getVersionById(@PathVariable Long id) {

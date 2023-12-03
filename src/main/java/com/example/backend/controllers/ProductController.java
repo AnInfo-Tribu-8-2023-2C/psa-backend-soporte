@@ -18,7 +18,7 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping
-    public ResponseEntity<?>  getProducts() {
+    public ResponseEntity<?> getProducts() {
         return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
     }
 
@@ -41,5 +41,10 @@ public class ProductController {
         response.put("data", newProduct);
         response.put("message", "Success: Product created");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}/versions")
+    public ResponseEntity<?> getProductVersions(@PathVariable Long id) {
+        return new ResponseEntity<>(productService.getProductVersions(id), HttpStatus.OK);
     }
 }

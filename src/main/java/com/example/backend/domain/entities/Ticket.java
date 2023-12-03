@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -19,9 +20,13 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-    private Long versionId;
+    @ManyToOne
+    @JoinColumn(name = "product_version_id")
+    private ProductVersion productVersion;
 
-    private Long CUITClient;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     private String title;
 

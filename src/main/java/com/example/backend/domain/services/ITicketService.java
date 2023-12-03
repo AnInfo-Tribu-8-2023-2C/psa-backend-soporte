@@ -1,13 +1,14 @@
 package com.example.backend.domain.services;
 
 import com.example.backend.domain.dto.MessageDTO;
+import com.example.backend.domain.entities.Client;
 import com.example.backend.domain.entities.Ticket;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface ITicketService {
 
-    public Collection<Ticket> getTickets();
+    public List<Ticket> getTickets(Long productVersionId);
 
    // public Ticket createTicket(Ticket ticket);
 
@@ -18,6 +19,8 @@ public interface ITicketService {
     public Ticket updateTicket(Ticket ticket, Long id);
 
     public MessageDTO deleteTicketById(Long id);
+
+    public Client getClientByTicketId(Long id);
 
    // public void associateTask(Long ticketId, Long taskId);
 }
