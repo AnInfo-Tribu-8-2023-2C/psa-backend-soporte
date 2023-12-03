@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Date;
 
 @Getter
@@ -19,13 +20,20 @@ public class ProductVersion {
     @Column(name = "id")
     private Long id;
 
-    private Long productId;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    private Long CUITClient;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_CUIT")
+    private Client client;
 
     private String name;
 
     private String description;
 
     private Date creationDate;
+
+    @OneToMany(mappedBy = "productVersion", cascade = CascadeType.ALL)
+    private List<Ticket> tickets;
 }

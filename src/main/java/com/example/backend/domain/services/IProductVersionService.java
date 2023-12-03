@@ -1,11 +1,14 @@
 package com.example.backend.domain.services;
 
 import com.example.backend.domain.entities.ProductVersion;
+import com.example.backend.domain.entities.Ticket;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface IProductVersionService {
-    Collection<ProductVersion> getProductVersions(Long productId);
+    List<ProductVersion> getProductVersions(Long productId);
 
     ProductVersion getVersionById(Long id);
+
+    List<Ticket> getTickets(Long productVersionId);
 }

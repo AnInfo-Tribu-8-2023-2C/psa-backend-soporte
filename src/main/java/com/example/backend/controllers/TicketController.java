@@ -18,10 +18,10 @@ public class TicketController {
     @Autowired
     private ITicketService ticketService;
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<?> getTickets() {
         return new ResponseEntity<>(ticketService.getTickets(), HttpStatus.OK);
-    }
+    }*/
 
     @PostMapping
     public ResponseEntity<?> createTicket(@RequestBody Ticket ticket) {
@@ -62,5 +62,10 @@ public class TicketController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageDTO> deleteTicketById(@PathVariable Long id) {
         return new ResponseEntity<>(ticketService.deleteTicketById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/client")
+    public ResponseEntity<?> getClientByTicketId(@PathVariable Long id) {
+        return new ResponseEntity<>(ticketService.getClientByTicketId(id), HttpStatus.OK);
     }
 }

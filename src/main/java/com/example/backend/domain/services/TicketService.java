@@ -1,6 +1,7 @@
 package com.example.backend.domain.services;
 
 import com.example.backend.domain.entities.Ticket;
+import com.example.backend.domain.entities.Client;
 import com.example.backend.domain.repositories.TicketRepository;
 
 import com.example.backend.domain.handlers.NotFoundException;
@@ -8,7 +9,7 @@ import com.example.backend.domain.dto.MessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,8 +27,8 @@ public class TicketService implements ITicketService {
    // }
 
     @Override
-    public Collection<Ticket> getTickets() {
-        return ticketRepository.findAll();
+    public List<Ticket> getTickets(Long productVersionId) {
+        return ticketRepository.findByProductVersionId(productVersionId);
     }
 
     @Override
@@ -58,6 +59,14 @@ public class TicketService implements ITicketService {
         } catch (Exception e) {
             throw new NotFoundException("Ticket not found");
         }
+    }
+
+    @Override
+    public Client getClientByTicketId(Long id) {
+        Ticket ticket = ticketRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Ticket with id: %d not found", id)));
+
+        return ticket.getClient();
     }
 
 //    @Override

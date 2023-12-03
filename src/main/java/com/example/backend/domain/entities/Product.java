@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.List;
 import java.util.Date;
 
 //@Data
@@ -31,4 +32,6 @@ public class Product {
     @Column(name = "creationDate")
     private Date createdAt;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductVersion> productVersions;
 }
