@@ -31,12 +31,12 @@ public class TaskController {
         try {
             newTask = taskService.save(task);
         } catch (DataAccessException e) {
-            response.put("message", "Error: ticket creation failed");
+            response.put("message", "Error: Task creation failed");
             response.put("error", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         response.put("data", newTask);
-        response.put("message", "Success: ticket created");
+        response.put("message", "Success: Task created");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

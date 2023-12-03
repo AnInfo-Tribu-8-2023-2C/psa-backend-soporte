@@ -27,19 +27,19 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Map<String, Object>> createProduct(@RequestBody Product product) {
         Product newProduct = null;
         Map<String, Object> response = new HashMap<>();
         try {
             newProduct = productService.save(product);
         } catch (DataAccessException e) {
-            response.put("message", "Error: product creation failed");
+            response.put("message", "Error: Product creation failed");
             response.put("error", e.getMessage());
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         response.put("data", newProduct);
-        response.put("message", "Success: product created");
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+        response.put("message", "Success: Product created");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

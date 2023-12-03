@@ -31,12 +31,12 @@ public class TicketController {
         try {
             newTicket = ticketService.save(ticket);
         } catch (DataAccessException e) {
-            response.put("message", "Error: ticket creation failed");
+            response.put("message", "Error: Ticket creation failed");
             response.put("error", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         response.put("data", newTicket);
-        response.put("message", "Success: ticket created");
+        response.put("message", "Success: Ticket created");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

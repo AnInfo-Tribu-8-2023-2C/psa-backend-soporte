@@ -21,21 +21,4 @@ public class ClientController {
     @Autowired
     private IClientService clientService;
 
-    @GetMapping
-    public ResponseEntity<?> getClients() {
-        RestTemplate restTemplate = new RestTemplate();
-        String apiClientsUrl = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes";
-
-        return restTemplate.getForEntity(apiClientsUrl, Client[].class);
-    }
-
-    @GetMapping("/{cuit}")
-    public ResponseEntity<?> getClientByCUIT(@PathVariable Long cuit) {
-        RestTemplate restTemplate = new RestTemplate();
-        String apiClientsUrl = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes";
-        Map<String, Long> params = new HashMap<>();
-        params.put("CUIT", cuit);
-        Client client = restTemplate.getForEntity(apiClientsUrl,Client.class, params).getBody();
-        return new ResponseEntity<>(client, HttpStatus.OK);
-    }
 }

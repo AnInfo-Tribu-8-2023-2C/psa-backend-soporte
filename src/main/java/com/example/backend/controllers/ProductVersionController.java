@@ -1,6 +1,7 @@
 package com.example.backend.controllers;
 
 import com.example.backend.domain.entities.Product;
+import com.example.backend.domain.entities.ProductVersion;
 import com.example.backend.domain.services.IProductService;
 import com.example.backend.domain.services.IProductVersionService;
 import com.example.backend.domain.services.ProductService;
@@ -31,6 +32,22 @@ public class ProductVersionController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getVersionById(@PathVariable Long id) {
         return new ResponseEntity<>(productVersionService.getVersionById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> createProductVersion(@RequestBody ProductVersion productVersion) {
+        ProductVersion newProductVersion = null;
+        Map<String, Object> response = new HashMap<>();
+        try {
+            newProductVersion = productVersionService.save(productVersion);
+        } catch (DataAccessException e) {
+            response.put("message", "Error: Product Version creation failed");
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        response.put("data", newProductVersion);
+        response.put("message", "Success: product Version created");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     /*@PostMapping("/product/save")
