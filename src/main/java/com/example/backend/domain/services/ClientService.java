@@ -20,10 +20,10 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Client getClientByCUIT(Long CUIT) {
-        Optional<Client> clientOptional =  clientRepository.findByCUIT(CUIT);
+    public Client getClientById(Long id) {
+        Optional<Client> clientOptional =  clientRepository.findById(id);
         if (clientOptional.isEmpty()) {
-            throw new NotFoundException(String.format("Client with id: %d not found", CUIT));
+            throw new NotFoundException(String.format("Client with id: %d not found", id));
         }
         return clientOptional.get();
     }

@@ -8,5 +8,5 @@ public interface IClientService {
 
     public Collection<Client> getClients();
 
-    public Client getClientByCUIT(Long CUIT);
+    public Client getClientById(Long id);
 }

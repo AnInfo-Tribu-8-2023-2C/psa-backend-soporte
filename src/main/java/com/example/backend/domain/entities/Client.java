@@ -14,14 +14,16 @@ import lombok.NoArgsConstructor;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CUIT")
-    private Long CUIT;
+    @Column(name = "id")
+    private Long id;
+
+    private String CUIT;
 
     private String name;
 
     private int type;
 
-    private int razonSocial;
+    private String razonSocial;
 
     private int phoneNumber;
 }
