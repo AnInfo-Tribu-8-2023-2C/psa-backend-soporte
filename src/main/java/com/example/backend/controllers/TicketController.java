@@ -4,9 +4,13 @@ import com.example.backend.domain.entities.Ticket;
 import com.example.backend.domain.services.ITicketService;
 import com.example.backend.domain.dto.MessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/tickets")
@@ -21,7 +25,19 @@ public class TicketController {
 
     @PostMapping
     public ResponseEntity<?> createTicket(@RequestBody Ticket ticket) {
-        return new ResponseEntity<>(ticketService.createTicket(ticket), HttpStatus.CREATED);
+
+        Ticket newTicket = null;
+        Map<String, Object> response = new HashMap<>();
+        try {
+            newTicket = ticketService.save(ticket);
+        } catch (DataAccessException e) {
+            response.put("message", "Error: ticket creation failed");
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        response.put("data", newTicket);
+        response.put("message", "Success: ticket created");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

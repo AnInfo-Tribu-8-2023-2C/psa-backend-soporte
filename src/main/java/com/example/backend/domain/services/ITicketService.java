@@ -7,9 +7,10 @@ import java.util.Collection;
 
 public interface ITicketService {
 
+    public Ticket save(Ticket ticket);
     public Collection<Ticket> getTickets();
 
-    public Ticket createTicket(Ticket ticket);
+    //public Ticket createTicket(Ticket ticket);
 
     public Ticket getTicketById(Long id);
 
