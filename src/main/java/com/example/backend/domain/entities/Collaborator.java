@@ -1,15 +1,12 @@
 package com.example.backend.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Collaborator {
     @Id
@@ -17,7 +14,9 @@ public class Collaborator {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "Nombre")
     private String name;
 
-    private String workPosition;
+    @Column(name = "Apellido")
+    private String lastName;
 }

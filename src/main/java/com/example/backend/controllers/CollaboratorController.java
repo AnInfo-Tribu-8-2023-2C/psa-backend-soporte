@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import com.example.backend.domain.entities.Client;
 import com.example.backend.domain.entities.Collaborator;
 import com.example.backend.domain.services.ICollaboratorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,29 +26,37 @@ public class CollaboratorController {
 
     @GetMapping
     public ResponseEntity<?> getCollaborators() {
-        RestTemplate restTemplate = new RestTemplate();
-        String apiCollaboratorsUrl = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos";
+        WebClient webClient = WebClient.builder().baseUrl("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos").build();
+        Mono<List<Collaborator>> collaboratorsMono = webClient
+                .get()
+                .retrieve()
+                .bodyToFlux(Collaborator.class)
+                .collectList();
 
-        return restTemplate.getForEntity(apiCollaboratorsUrl, Collaborator[].class);
+        return ResponseEntity.ok(collaboratorsMono.block());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCollaboratorById(@PathVariable Long id) {
-        RestTemplate restTemplate = new RestTemplate();
-        String apiCollaboratorsUrl = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos";
-        Map<String, Long> params = new HashMap<>();
-        params.put("legajo", id);
-        Collaborator collaborator = restTemplate.getForEntity(apiCollaboratorsUrl,Collaborator.class, params).getBody();
-        return new ResponseEntity<>(collaborator, HttpStatus.OK);
+        WebClient webClient = WebClient.builder().baseUrl("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos").build();
+        Mono<Collaborator> collaboratorMono = webClient.get()
+                .uri("", id)
+                .retrieve()
+                .bodyToMono(Collaborator.class);
+
+        return collaboratorMono.map(collaborator -> new ResponseEntity<>(collaborator, HttpStatus.OK))
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND)).block();
     }
 
     @GetMapping("/{name}")
     public ResponseEntity<?> getCollaboratorByName(@PathVariable String name) {
-        RestTemplate restTemplate = new RestTemplate();
-        String apiClientsUrl = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos";
-        Map<String, String> params = new HashMap<>();
-        params.put("Nombre", name);
-        Collaborator collaborator = restTemplate.getForEntity(apiClientsUrl,Collaborator.class, params).getBody();
-        return new ResponseEntity<>(collaborator, HttpStatus.OK);
+        WebClient webClient = WebClient.builder().baseUrl("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos").build();
+        Mono<Collaborator> collaboratorMono = webClient.get()
+                .uri("", name)
+                .retrieve()
+                .bodyToMono(Collaborator.class);
+
+        return collaboratorMono.map(collaborator -> new ResponseEntity<>(collaborator, HttpStatus.OK))
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND)).block();
     }
 }
