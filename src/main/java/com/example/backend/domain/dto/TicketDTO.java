@@ -53,6 +53,5 @@ public class TicketDTO {
                 client(ticket.getClient()).
                 productVersionId(ticket.getProductVersion().getId()).
                 listLinkedTasks(ticket.getListLinkedTasks()).build();
-
     }
 }

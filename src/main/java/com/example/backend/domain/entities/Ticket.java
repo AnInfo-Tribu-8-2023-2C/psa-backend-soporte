@@ -52,5 +52,4 @@ public class Ticket {
     )
     @Column(name="task_id")
     private List<Long> listLinkedTasks = new ArrayList<>();
-
 }

@@ -1,6 +1,5 @@
 package com.example.backend.cucumber;
 
-import com.example.backend.domain.dto.TicketDTO;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -8,8 +7,6 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
-
-import java.util.List;
 
 public class VerTicketTest {
     private Response response;
