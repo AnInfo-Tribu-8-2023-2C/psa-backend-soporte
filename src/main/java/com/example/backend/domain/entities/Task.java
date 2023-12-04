@@ -30,7 +30,7 @@ public class Task {
 
     //private int severity;
 
-    @ManyToMany(mappedBy = "listLinkedTasks")
-    private List<Ticket> listLinkedTickets = new ArrayList<>();
+    //@ManyToMany(mappedBy = "listLinkedTasks")
+    //private List<Ticket> listLinkedTickets = new ArrayList<>();
 
 }

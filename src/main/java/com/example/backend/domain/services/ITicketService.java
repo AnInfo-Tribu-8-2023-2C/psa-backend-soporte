@@ -1,6 +1,7 @@
 package com.example.backend.domain.services;
 
 import com.example.backend.domain.dto.MessageDTO;
+import com.example.backend.domain.dto.TicketDTO;
 import com.example.backend.domain.entities.Client;
 import com.example.backend.domain.entities.Ticket;
 
@@ -10,7 +11,7 @@ public interface ITicketService {
 
     public List<Ticket> getTickets(Long productVersionId);
 
-   // public Ticket createTicket(Ticket ticket);
+   public Ticket createTicket(TicketDTO ticket);
 
     public Ticket getTicketById(Long id);
 
@@ -20,7 +21,7 @@ public interface ITicketService {
 
     public MessageDTO deleteTicketById(Long id);
 
-    public Client getClientByTicketId(Long id);
+    //public Client getClientByTicketId(Long id);
 
    // public void associateTask(Long ticketId, Long taskId);
 }

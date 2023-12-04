@@ -24,10 +24,6 @@ public class Ticket {
     @JoinColumn(name = "product_version_id")
     private ProductVersion productVersion;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
-    private Client client;
-
     private String title;
 
     private String description;
@@ -42,11 +38,12 @@ public class Ticket {
 
     //Comentarios, historial de comentarios
 
-    @ManyToMany
-    @JoinTable(
-            name = "ticket_task",
-            joinColumns = @JoinColumn(name = "ticket_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id"))
-    private List<Task> listLinkedTasks = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(
+            name="task",
+            joinColumns=@JoinColumn(name="ticket_id")
+    )
+    @Column(name="task_id")
+    private List<Long> listLinkedTasks = new ArrayList<>();
 
 }

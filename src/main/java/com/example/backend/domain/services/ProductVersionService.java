@@ -1,5 +1,7 @@
 package com.example.backend.domain.services;
 
+import com.example.backend.domain.dto.ClientDTO;
+import com.example.backend.domain.dto.ProductVersionDTO;
 import com.example.backend.domain.entities.ProductVersion;
 import com.example.backend.domain.entities.Ticket;
 import com.example.backend.domain.services.ITicketService;
@@ -17,8 +19,19 @@ public class ProductVersionService implements IProductVersionService {
     ProductVersionRepository productVersionRepository;
 
     @Autowired
-    ITicketService ticketService;
+    IProductService productService;
 
+   // @Autowired
+    //ITicketService ticketService;
+
+    @Override
+    public ProductVersion createProductVersion(ProductVersionDTO productVersion) {
+        return productVersionRepository.save(ProductVersion.builder().
+                product(productService.getProductById(productVersion.getProductId())).
+                name(productVersion.getName()).
+                description(productVersion.getDescription()).
+                creationDate(productVersion.getCreationDate()).build());
+    }
     @Override
     public ProductVersion save(ProductVersion productVersion) {
         return productVersionRepository.save(productVersion);
@@ -37,8 +50,8 @@ public class ProductVersionService implements IProductVersionService {
         return versionOptional.get();
     }
 
-    @Override
-    public List<Ticket> getTickets(Long productVersionId) {
-        return ticketService.getTickets(productVersionId);
-    }
+    //@Override
+   // public List<Ticket> getTickets(Long productVersionId) {
+ //       return ticketService.getTickets(productVersionId);
+  //  }
 }

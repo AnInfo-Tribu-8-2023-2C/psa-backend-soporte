@@ -1,9 +1,12 @@
 package com.example.backend.controllers;
 
+import com.example.backend.domain.dto.TicketDTO;
 import com.example.backend.domain.entities.Product;
 import com.example.backend.domain.entities.ProductVersion;
+import com.example.backend.domain.entities.Ticket;
 import com.example.backend.domain.services.IProductService;
 import com.example.backend.domain.services.IProductVersionService;
+import com.example.backend.domain.services.ITicketService;
 import com.example.backend.domain.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -16,13 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/products/{productId}/versions")
+@RequestMapping("/products/versions")
 public class ProductVersionController {
     @Autowired
     private IProductVersionService productVersionService;
 
     @Autowired
-    private IProductService productService;
+    private ITicketService ticketService;
 
     /*@GetMapping
     public ResponseEntity<?> getProductVersions(@PathVariable Long productId) {
@@ -34,19 +37,20 @@ public class ProductVersionController {
         return new ResponseEntity<>(productVersionService.getVersionById(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> createProductVersion(@RequestBody ProductVersion productVersion) {
-        ProductVersion newProductVersion = null;
+    @PostMapping("/tickets")
+    public ResponseEntity<?> createTicket(@RequestBody TicketDTO ticket) {
+
+        Ticket newTicket = null;
         Map<String, Object> response = new HashMap<>();
         try {
-            newProductVersion = productVersionService.save(productVersion);
+            newTicket = ticketService.createTicket(ticket);
         } catch (DataAccessException e) {
-            response.put("message", "Error: Product Version creation failed");
+            response.put("message", "Error: Ticket creation failed");
             response.put("error", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        response.put("data", newProductVersion);
-        response.put("message", "Success: product Version created");
+        response.put("data", TicketDTO.map(newTicket));
+        response.put("message", "Success: Ticket created");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
