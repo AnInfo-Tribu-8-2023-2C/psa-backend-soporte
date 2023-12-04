@@ -20,7 +20,7 @@ public class TicketDTO {
 
     private ProductVersion productVersion;
 
-    private ClientDTO client;
+    private String client;
 
     private String title;
 
@@ -29,6 +29,8 @@ public class TicketDTO {
     private String state;
 
     private Date createdAt;
+
+    private Date updatedAt;
 
     private Integer severity;
 
@@ -42,7 +44,10 @@ public class TicketDTO {
                 title(ticket.getTitle()).
                 description(ticket.getDescription()).
                 state(ticket.getState()).
-                severity(ticket.getSeverity()).build();
+                severity(ticket.getSeverity()).
+                createdAt(ticket.getCreatedAt()).
+                updatedAt(ticket.getUpdatedAt()).
+                client(ticket.getClient()).build();
 
     }
 }

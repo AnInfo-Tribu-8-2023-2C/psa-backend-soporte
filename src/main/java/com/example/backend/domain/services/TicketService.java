@@ -39,7 +39,8 @@ public class TicketService implements ITicketService {
                 description(ticket.getDescription()).
                 state(ticket.getState()).
                 severity(ticket.getSeverity()).
-                createdAt(ticket.getCreatedAt()).build());
+                createdAt(ticket.getCreatedAt()).
+                client(ticket.getClient()).build());
     }
     @Override
     public List<Ticket> getTickets(Long productVersionId) {

@@ -33,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Long id) {
-        return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
+        return new ResponseEntity<>(ProductDTO.map(productService.getProductById(id)), HttpStatus.OK);
     }
 
     @PostMapping
