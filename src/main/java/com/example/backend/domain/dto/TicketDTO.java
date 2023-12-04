@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -36,6 +37,8 @@ public class TicketDTO {
 
     private Long productVersionId;
 
+    private List<Long> listLinkedTasks;
+
     public static TicketDTO map(Ticket ticket) {
         if (ticket == null) {
             return null;
@@ -48,7 +51,8 @@ public class TicketDTO {
                 createdAt(ticket.getCreatedAt()).
                 updatedAt(ticket.getUpdatedAt()).
                 client(ticket.getClient()).
-                productVersionId(ticket.getProductVersion().getId()).build();
+                productVersionId(ticket.getProductVersion().getId()).
+                listLinkedTasks(ticket.getListLinkedTasks()).build();
 
     }
 }
