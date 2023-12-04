@@ -31,6 +31,7 @@ public class ProductVersion {
     @CreationTimestamp
     private Date creationDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "productVersion", cascade = CascadeType.ALL)
     private List<Ticket> tickets = new ArrayList<>();
 }

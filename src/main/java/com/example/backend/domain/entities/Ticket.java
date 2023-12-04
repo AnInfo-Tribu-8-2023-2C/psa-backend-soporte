@@ -46,6 +46,7 @@ public class Ticket {
     //Comentarios, historial de comentarios
 
     @ElementCollection
+    @Builder.Default
     @CollectionTable(
             name="task",
             joinColumns=@JoinColumn(name="ticket_id")
