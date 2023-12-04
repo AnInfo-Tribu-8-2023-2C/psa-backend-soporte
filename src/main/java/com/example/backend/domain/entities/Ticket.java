@@ -51,6 +51,6 @@ public class Ticket {
             joinColumns=@JoinColumn(name="ticket_id")
     )
     @Column(name="task_id")
-    private List<Long> listLinkedTasks = new ArrayList<>();
+    private List<Long> listLinkedTasks;
 
 }

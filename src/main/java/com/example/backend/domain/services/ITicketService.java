@@ -8,18 +8,19 @@ import com.example.backend.domain.entities.Ticket;
 import java.util.List;
 
 public interface ITicketService {
+    List<Ticket> findByProductVersionId(Long productVersionId);
 
-    public List<Ticket> findByProductVersionId(Long productVersionId);
+    Ticket createTicket(TicketDTO ticket);
 
-   public Ticket createTicket(TicketDTO ticket);
+    List<Ticket> getTickets();
 
-    public Ticket getTicketById(Long id);
+    Ticket getTicketById(Long id);
 
-    public Ticket save(Ticket ticket);
+    Ticket save(Ticket ticket);
 
-    public Ticket updateTicket(Ticket ticket, Long id);
+    Ticket updateTicket(Ticket ticket, Long id);
 
-    public MessageDTO deleteTicketById(Long id);
+    MessageDTO deleteTicketById(Long id);
 
     //public Client getClientByTicketId(Long id);
 

@@ -21,6 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/products/versions")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductVersionController {
     @Autowired
     private IProductVersionService productVersionService;

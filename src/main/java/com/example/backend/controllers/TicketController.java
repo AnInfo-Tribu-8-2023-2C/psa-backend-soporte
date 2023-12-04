@@ -12,18 +12,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tickets")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TicketController {
     @Autowired
     private ITicketService ticketService;
 
-    /*@GetMapping
+    @GetMapping
     public ResponseEntity<?> getTickets() {
-        return new ResponseEntity<>(ticketService.getTickets(), HttpStatus.OK);
-    }*/
+        List<TicketDTO> tickets = ticketService.getTickets().stream().map(TicketDTO::map).collect(Collectors.toList());
+        return new ResponseEntity<>(tickets, HttpStatus.OK);
+    }
 
 
     @GetMapping("/{id}")

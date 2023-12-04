@@ -40,6 +40,7 @@ public class TicketService implements ITicketService {
                 state(ticket.getState()).
                 severity(ticket.getSeverity()).
                 createdAt(ticket.getCreatedAt()).
+                listLinkedTasks(ticket.getListLinkedTasks()).
                 client(ticket.getClient()).build());
     }
     @Override
@@ -84,6 +85,12 @@ public class TicketService implements ITicketService {
             throw new NotFoundException("Ticket not found");
         }
     }
+
+    @Override
+    public List<Ticket> getTickets(){
+        return ticketRepository.findAll();
+    }
+
 /*
     @Override
     public Client getClientByTicketId(Long id) {
