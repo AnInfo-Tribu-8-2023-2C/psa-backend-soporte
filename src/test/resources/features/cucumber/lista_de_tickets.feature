@@ -5,7 +5,7 @@ Feature: Ver Listado de Versiones de un Producto
   Para tener una visión simple y organizada de las versiones existentes de un producto.
 
   Background:
-    Given que existe al menos un producto con una versión
+    Given que existe al menos un producto con una versión con tickets y otra versión sin tickets
 
   Scenario: El colaborador de soporte ingresó a un producto y le apareció un listado de versiones existentes
     Given que hay una versión con tickets

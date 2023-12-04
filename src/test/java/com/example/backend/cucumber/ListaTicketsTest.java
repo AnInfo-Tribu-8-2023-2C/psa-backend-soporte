@@ -1,6 +1,5 @@
 package com.example.backend.cucumber;
 
-import com.example.backend.domain.dto.ProductVersionDTO;
 import com.example.backend.domain.dto.TicketDTO;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -18,8 +17,8 @@ public class ListaTicketsTest {
     String productId;
     String productVersionId1;
     String productVersionId2;
-    @Given("que existe al menos un producto con una versión")
-    public void crearProductoYVersionDeProducto() {
+    @Given("que existe al menos un producto con una versión con tickets y otra versión sin tickets")
+    public void crearProductoYDosVersionesDeProducto() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8000;
         RestAssured.basePath = "/products";
