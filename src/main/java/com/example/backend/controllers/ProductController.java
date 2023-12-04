@@ -26,16 +26,6 @@ public class ProductController {
     @Autowired
     private IProductVersionService productVersionService;
 
-    @GetMapping
-    public ResponseEntity<?> getProducts() {
-        return new ResponseEntity<>(productService.getProducts().stream().map(ProductDTO::map), HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable Long id) {
-        return new ResponseEntity<>(ProductDTO.map(productService.getProductById(id)), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<Map<String, Object>> createProduct(@RequestBody Product product) {
         Product newProduct = null;
@@ -50,6 +40,16 @@ public class ProductController {
         response.put("data", ProductDTO.map(newProduct));
         response.put("message", "Success: Product created");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getProducts() {
+        return new ResponseEntity<>(productService.getProducts().stream().map(ProductDTO::map), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+        return new ResponseEntity<>(ProductDTO.map(productService.getProductById(id)), HttpStatus.OK);
     }
 
     @PostMapping("/versions")
@@ -70,6 +70,6 @@ public class ProductController {
 
     @GetMapping("/{id}/versions")
     public ResponseEntity<?> getProductVersions(@PathVariable Long id) {
-        return new ResponseEntity<>(productService.getProductVersions(id), HttpStatus.OK);
+        return new ResponseEntity<>(productVersionService.findByProductId(id).stream().map(ProductVersionDTO::map), HttpStatus.OK);
     }
 }

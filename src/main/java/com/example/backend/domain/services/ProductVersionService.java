@@ -42,6 +42,11 @@ public class ProductVersionService implements IProductVersionService {
     }
 
     @Override
+    public List<ProductVersion> findByProductId(Long id) {
+        return productVersionRepository.findByProductId(id);
+    }
+
+    @Override
     public ProductVersion getVersionById(Long id) {
         Optional<ProductVersion> versionOptional =  productVersionRepository.findById(id);
         if (versionOptional.isEmpty()) {

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ITicketService {
 
-    public List<Ticket> getTickets(Long productVersionId);
+    public List<Ticket> findByProductVersionId(Long productVersionId);
 
    public Ticket createTicket(TicketDTO ticket);
 
