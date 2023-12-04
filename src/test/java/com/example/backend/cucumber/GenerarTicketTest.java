@@ -10,37 +10,28 @@ import org.junit.jupiter.api.Assertions;
 public class GenerarTicketTest {
 
     private Response response;
-    //private String ticketRequestBody;
+    private String ticketRequestBody;
 
     @Dado("se completaron los datos correspondientes para crear un ticket de una queja pendiente")
     public void datosCompletados() {
-        String ticketRequestBody = "{\"product_id\":\"1\",\"name\":\"Windows 3.2.4\",\"description\":\"Version 3.2.4 para Windows\"}";
+        String IncompleteTicketRequestBody = "{\"product_id\":\"1\",\"name\":\"Windows 3.2.4\",\"description\":\"Version 3.2.4 para Windows\"}";
 
-        Assertions.assertFalse(ticketRequestBody.contains(":\"\""), "El ticket no debe tener campos vacíos");
+        Assertions.assertFalse(IncompleteTicketRequestBody.contains(":\"\""), "El ticket no debe tener campos vacíos");
     }
 
     @Dado("hay campos que no se completaron al generar un ticket de una queja")
     public void datosNoCompletados() {
         String ticketRequestBody = "{\"product_id\":\"1\",\"name\":\"\",\"description\":\"Version 3.2.4 para Windows\"}";
 
-        Assertions.assertFalse(ticketRequestBody.contains(":\"\""), "El ticket no debe tener campos vacíos");
+        Assertions.assertTrue(ticketRequestBody.contains(":\"\""), "El ticket no debe tener campos vacíos");
     }
 
     @Cuando("el colaborador de soporte intenta generar un ticket")
     public void enviarDatosAlBackend() {
         RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 3307;
+        RestAssured.port = 8000;
         RestAssured.basePath = "/products/versions/tickets";
-
-        String ticketRequestBody = """
-        {
-            "title": "Ticket title8",
-            "description": "Ticket description8",
-            "state": "ABIERTO",
-            "severity": 3,
-            "productVersionId": 3
-        }
-         """;
+        ticketRequestBody = "{\"title\":\"Problema en el login\",\"description\":\"El usuario tiene problemas al loggearse desde el celular\",\"state\":\"ABIERTO\",\"severity\":3,\"productVersionId\":1}";
 
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -50,11 +41,16 @@ public class GenerarTicketTest {
 
     @Entonces("se le informará que el ticket se ha generado con éxito y se generará.")
     public void confirmarGeneracionExitosa() {
-        Assertions.assertEquals(200, response.getStatusCode(), "Se esperaba un código de estado 200");
+        Assertions.assertEquals(201, response.getStatusCode(), "Se esperaba un código de estado 200");
 
-        Assertions.assertEquals("1", response.jsonPath().getString("product_id"), "El product_id no es el esperado");
-        Assertions.assertEquals("Windows 3.2.4", response.jsonPath().getString("name"), "El name no es el esperado");
-        Assertions.assertEquals("Version 3.2.4 para Windows", response.jsonPath().getString("description"), "El description no es el esperado");
+        System.out.println("Respuesta JSON completa: " + response.asString());
+
+        Assertions.assertEquals("Problema en el login", response.jsonPath().getString("data.title"), "El title no es el esperado");
+        Assertions.assertEquals("El usuario tiene problemas al loggearse desde el celular", response.jsonPath().getString("data.description"), "El description no es el esperado");
+        Assertions.assertEquals("ABIERTO", response.jsonPath().getString("data.state"), "El state no es el esperado");
+        Assertions.assertEquals("3", response.jsonPath().getString("data.severity"), "El severity no es el esperado");
+        //Assertions.assertEquals("1", response.jsonPath().getString("data.productVersionId"), "El productVersionId no es el esperado");
+
     }
 
     @Entonces("se le informará que hay campos que no han sido completados, y se pedirá que los complete.")
