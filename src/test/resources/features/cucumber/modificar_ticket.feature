@@ -4,6 +4,9 @@ Feature: Modificar Ticket
   Quiero modificar un ticket,
   Para corregir los datos del mismo en caso de un error, inconveniente o cambio.
 
+  Background:
+    Given existen al menos un producto con una versión con un ticket
+
   Scenario: El Colaborador de soporte modifica el ticket exitosamente
     Given hay un ticket creado
     When el Colaborador de soporte modifica el título
