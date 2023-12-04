@@ -30,7 +30,7 @@ public class TicketDTO {
 
     private Date createdAt;
 
-    private int severity;
+    private Integer severity;
 
     private Long productVersionId;
 
@@ -42,7 +42,6 @@ public class TicketDTO {
                 title(ticket.getTitle()).
                 description(ticket.getDescription()).
                 state(ticket.getState()).
-                createdAt(ticket.getCreatedAt()).
                 severity(ticket.getSeverity()).build();
 
     }

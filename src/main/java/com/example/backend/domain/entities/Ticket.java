@@ -34,7 +34,7 @@ public class Ticket {
     @Column(name = "creationDate")
     private Date createdAt;
 
-    private int severity;
+    private Integer severity;
 
     //Comentarios, historial de comentarios
 

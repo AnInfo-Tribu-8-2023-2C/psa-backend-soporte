@@ -2,6 +2,7 @@ package com.example.backend.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.List;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class ProductVersion {
 
     private String description;
 
+    @CreationTimestamp
     private Date creationDate;
 
     @OneToMany(mappedBy = "productVersion", cascade = CascadeType.ALL)
