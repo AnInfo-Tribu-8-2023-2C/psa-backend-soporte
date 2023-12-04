@@ -4,6 +4,9 @@ Feature: Generar un ticket
   Quiero generar un ticket,
   Para tener registro de todas las quejas realizadas por los usuarios.
 
+  Background:
+    Given existe al menos un producto con una versión
+
   Scenario: El colaborador de soporte genera un ticket exitosamente
     Given se completaron los datos correspondientes para crear un ticket de una queja pendiente
     When el colaborador de soporte intenta generar un ticket
