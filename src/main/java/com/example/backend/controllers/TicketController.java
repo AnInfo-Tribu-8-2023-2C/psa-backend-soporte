@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import com.example.backend.domain.dto.TicketDTO;
 import com.example.backend.domain.entities.Ticket;
 import com.example.backend.domain.services.ITicketService;
 import com.example.backend.domain.dto.MessageDTO;
@@ -26,7 +27,7 @@ public class TicketController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getTicketById(@PathVariable Long id) {
-        return new ResponseEntity<>(ticketService.getTicketById(id), HttpStatus.OK);
+        return new ResponseEntity<>(TicketDTO.map(ticketService.getTicketById(id)), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

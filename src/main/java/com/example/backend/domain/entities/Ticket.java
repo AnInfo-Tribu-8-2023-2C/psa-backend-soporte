@@ -3,6 +3,7 @@ package com.example.backend.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,11 +31,17 @@ public class Ticket {
 
     private String state;
 
+    private String client;
+
     @CreationTimestamp
     @Column(name = "creationDate")
     private Date createdAt;
 
-    private int severity;
+    @UpdateTimestamp
+    @Column(name = "updateDate")
+    private Date updatedAt;
+
+    private Integer severity;
 
     //Comentarios, historial de comentarios
 
