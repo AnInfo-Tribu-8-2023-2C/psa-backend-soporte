@@ -13,5 +13,7 @@ public interface IProductVersionService {
     ProductVersion save(ProductVersion productVersion);
     ProductVersion getVersionById(Long id);
 
+    List<ProductVersion> findByProductId(Long id);
+
     //List<Ticket> getTickets(Long productVersionId);
 }

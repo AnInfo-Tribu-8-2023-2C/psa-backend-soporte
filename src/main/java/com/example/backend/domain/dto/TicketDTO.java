@@ -32,7 +32,7 @@ public class TicketDTO {
 
     private Date updatedAt;
 
-    private Integer severity;
+    private String severity;
 
     private Long productVersionId;
 
@@ -47,7 +47,8 @@ public class TicketDTO {
                 severity(ticket.getSeverity()).
                 createdAt(ticket.getCreatedAt()).
                 updatedAt(ticket.getUpdatedAt()).
-                client(ticket.getClient()).build();
+                client(ticket.getClient()).
+                productVersionId(ticket.getProductVersion().getId()).build();
 
     }
 }

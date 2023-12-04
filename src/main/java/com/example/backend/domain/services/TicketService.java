@@ -43,7 +43,7 @@ public class TicketService implements ITicketService {
                 client(ticket.getClient()).build());
     }
     @Override
-    public List<Ticket> getTickets(Long productVersionId) {
+    public List<Ticket> findByProductVersionId(Long productVersionId) {
         return ticketRepository.findByProductVersionId(productVersionId);
     }
 
@@ -62,9 +62,17 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public Ticket updateTicket(Ticket ticket, Long id) {
-        Ticket selectedTicket = getTicketById(id);
-        return ticketRepository.save(selectedTicket);
+    public Ticket updateTicket(Ticket newTicket, Long id) {
+        if (ticketRepository.findById(id).isEmpty()) {
+            throw new NotFoundException(String.format("Ticket with id: %d not found", id));
+        }
+        Ticket ticket = ticketRepository.findById(id).get();
+        ticket.setTitle(newTicket.getTitle());
+        ticket.setDescription(newTicket.getDescription());
+        ticket.setState(newTicket.getState());
+        ticket.setSeverity(newTicket.getSeverity());
+        ticket.setListLinkedTasks(newTicket.getListLinkedTasks());
+        return ticketRepository.save(ticket);
     }
 
     @Override
