@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import com.example.backend.domain.dto.ProductVersionDTO;
 import com.example.backend.domain.dto.TicketDTO;
 import com.example.backend.domain.entities.Product;
 import com.example.backend.domain.entities.ProductVersion;
@@ -34,7 +35,7 @@ public class ProductVersionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getVersionById(@PathVariable Long id) {
-        return new ResponseEntity<>(productVersionService.getVersionById(id), HttpStatus.OK);
+        return new ResponseEntity<>(ProductVersionDTO.map(productVersionService.getVersionById(id)), HttpStatus.OK);
     }
 
     @PostMapping("/tickets")
