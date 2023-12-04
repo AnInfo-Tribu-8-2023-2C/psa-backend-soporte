@@ -1,5 +1,6 @@
 package com.example.backend.domain.services;
 
+import com.example.backend.domain.dto.ProductVersionDTO;
 import com.example.backend.domain.entities.Product;
 import com.example.backend.domain.entities.ProductVersion;
 import com.example.backend.domain.services.IProductVersionService;
@@ -17,9 +18,6 @@ public class ProductService implements IProductService {
     @Autowired
     ProductRepository productRepository;
 
-    @Autowired
-    IProductVersionService productVersionService;
-
     @Override
     public Collection<Product> getProducts() {
         return productRepository.findAll();
@@ -35,12 +33,19 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public ProductVersion createProductVersion(ProductVersionDTO productVersion) {
+        //return productVersionService.createProductVersion(productVersion);
+        return null;
+    }
+
+    @Override
     public Product save(Product product) {
         return productRepository.save(product);
     }
 
     @Override
     public List<ProductVersion> getProductVersions(Long productId) {
-        return productVersionService.getProductVersions(productId);
+        //return productVersionService.getProductVersions(productId);
+        return null;
     }
 }

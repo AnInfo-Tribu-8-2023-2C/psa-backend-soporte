@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.List;
 import java.util.Date;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -20,10 +21,6 @@ public class ProductVersion {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_CUIT")
-    private Client client;
 
     private String name;
 

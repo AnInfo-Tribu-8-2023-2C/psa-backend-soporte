@@ -1,5 +1,7 @@
 package com.example.backend.domain.services;
 
+import com.example.backend.domain.dto.TicketDTO;
+import com.example.backend.domain.entities.ProductVersion;
 import com.example.backend.domain.entities.Ticket;
 import com.example.backend.domain.entities.Client;
 import com.example.backend.domain.repositories.TicketRepository;
@@ -18,6 +20,9 @@ public class TicketService implements ITicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
+    private ProductVersionService productVersionService;
+
  //   @Autowired
  //   private ITicketTaskService ticketTaskService;
 
@@ -26,6 +31,16 @@ public class TicketService implements ITicketService {
    //     return ticketRepository.save(ticket);
    // }
 
+    @Override
+    public Ticket createTicket(TicketDTO ticket) {
+        return ticketRepository.save(Ticket.builder().
+                productVersion(productVersionService.getVersionById(ticket.getProductVersionId())).
+                title(ticket.getTitle()).
+                description(ticket.getDescription()).
+                state(ticket.getState()).
+                severity(ticket.getSeverity()).
+                createdAt(ticket.getCreatedAt()).build());
+    }
     @Override
     public List<Ticket> getTickets(Long productVersionId) {
         return ticketRepository.findByProductVersionId(productVersionId);
@@ -60,7 +75,7 @@ public class TicketService implements ITicketService {
             throw new NotFoundException("Ticket not found");
         }
     }
-
+/*
     @Override
     public Client getClientByTicketId(Long id) {
         Ticket ticket = ticketRepository.findById(id)
@@ -68,6 +83,8 @@ public class TicketService implements ITicketService {
 
         return ticket.getClient();
     }
+
+ */
 
 //    @Override
 //    public void associateTask(Long ticketId, Long taskId) {

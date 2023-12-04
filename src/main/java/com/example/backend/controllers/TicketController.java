@@ -23,22 +23,6 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.getTickets(), HttpStatus.OK);
     }*/
 
-    @PostMapping
-    public ResponseEntity<?> createTicket(@RequestBody Ticket ticket) {
-
-        Ticket newTicket = null;
-        Map<String, Object> response = new HashMap<>();
-        try {
-            newTicket = ticketService.save(ticket);
-        } catch (DataAccessException e) {
-            response.put("message", "Error: Ticket creation failed");
-            response.put("error", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        response.put("data", newTicket);
-        response.put("message", "Success: Ticket created");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getTicketById(@PathVariable Long id) {
@@ -63,9 +47,11 @@ public class TicketController {
     public ResponseEntity<MessageDTO> deleteTicketById(@PathVariable Long id) {
         return new ResponseEntity<>(ticketService.deleteTicketById(id), HttpStatus.OK);
     }
-
+/*
     @GetMapping("/{id}/client")
     public ResponseEntity<?> getClientByTicketId(@PathVariable Long id) {
         return new ResponseEntity<>(ticketService.getClientByTicketId(id), HttpStatus.OK);
     }
+
+ */
 }
