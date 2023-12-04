@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -33,5 +34,5 @@ public class Product {
     private Date createdAt;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductVersion> productVersions;
+    private List<ProductVersion> productVersions = new ArrayList<>();
 }
