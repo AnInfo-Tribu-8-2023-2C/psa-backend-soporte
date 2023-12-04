@@ -43,7 +43,8 @@ public class ProductVersionDTO {
                 name(productVersion.getName()).
                 description(productVersion.getDescription()).
                 creationDate(productVersion.getCreationDate()).
-                tickets(list.stream().map(TicketDTO::map).collect(Collectors.toList())).build();
+                tickets(list.stream().map(TicketDTO::map).collect(Collectors.toList())).
+                productId(productVersion.getProduct().getId()).build();
 
     }
 }

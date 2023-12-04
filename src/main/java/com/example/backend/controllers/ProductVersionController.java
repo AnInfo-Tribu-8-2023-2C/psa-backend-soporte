@@ -38,6 +38,11 @@ public class ProductVersionController {
         return new ResponseEntity<>(ProductVersionDTO.map(productVersionService.getVersionById(id)), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/tickets")
+    public ResponseEntity<?> getTickets(@PathVariable Long id) {
+        return new ResponseEntity<>((ticketService.findByProductVersionId(id).stream().map(TicketDTO::map)), HttpStatus.OK);
+    }
+
     @PostMapping("/tickets")
     public ResponseEntity<?> createTicket(@RequestBody TicketDTO ticket) {
 

@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import com.example.backend.domain.dto.ProductDTO;
 import com.example.backend.domain.dto.TicketDTO;
 import com.example.backend.domain.entities.Ticket;
 import com.example.backend.domain.services.ITicketService;
@@ -33,7 +34,7 @@ public class TicketController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateTicket(@RequestBody Ticket ticket, @PathVariable Long id) {
         try {
-            return new ResponseEntity<>(ticketService.updateTicket(ticket, id), HttpStatus.OK);
+            return new ResponseEntity<>(TicketDTO.map(ticketService.updateTicket(ticket, id)), HttpStatus.OK);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
