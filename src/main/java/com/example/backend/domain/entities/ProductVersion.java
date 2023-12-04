@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -31,5 +32,5 @@ public class ProductVersion {
     private Date creationDate;
 
     @OneToMany(mappedBy = "productVersion", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
 }
