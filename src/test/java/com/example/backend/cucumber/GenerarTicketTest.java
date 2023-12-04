@@ -1,7 +1,8 @@
 package com.example.backend.cucumber;
-import io.cucumber.java.es.Dado;
-import io.cucumber.java.es.Cuando;
-import io.cucumber.java.es.Entonces;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -10,23 +11,22 @@ import org.junit.jupiter.api.Assertions;
 public class GenerarTicketTest {
 
     private Response response;
-    //private String ticketRequestBody;
 
-    @Dado("se completaron los datos correspondientes para crear un ticket de una queja pendiente")
+    @Given("se completaron los datos correspondientes para crear un ticket de una queja pendiente")
     public void datosCompletados() {
         String ticketRequestBody = "{\"title\":\"Problema con el login\",\"description\":\"Al usuario no lo deja loggearse desde el celular\",\"state\":\"ABIERTO\",\"severity\":3,\"productVersionId\":2}";
 
         Assertions.assertFalse(ticketRequestBody.contains(":\"\""), "El ticket no debe tener campos vacíos");
     }
 
-    @Dado("hay campos que no se completaron al generar un ticket de una queja")
+    @Given("hay campos que no se completaron al generar un ticket de una queja")
     public void datosNoCompletados() {
         String ticketRequestBody = "{\"title\":\"\",\"description\":\"Al usuario no lo deja loggearse desde el celular\",\"state\":\"ABIERTO\",\"severity\":3,\"productVersionId\":2}";
 
         Assertions.assertTrue(ticketRequestBody.contains(":\"\""), "El ticket no debe tener campos vacíos");
     }
 
-    @Cuando("el colaborador de soporte intenta generar un ticket")
+    @When("el colaborador de soporte intenta generar un ticket")
     public void enviarDatosAlBackend() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8000;
@@ -40,7 +40,7 @@ public class GenerarTicketTest {
                 .post();
     }
 
-    @Entonces("se le informará que el ticket se ha generado con éxito y se generará.")
+    @Then("se le informará que el ticket se ha generado con éxito y se generará.")
     public void confirmarGeneracionExitosa() {
         Assertions.assertEquals(201, response.getStatusCode(), "Se esperaba un código de estado 201");
 
@@ -51,9 +51,8 @@ public class GenerarTicketTest {
         Assertions.assertEquals("2", response.jsonPath().getString("data.productVersionId"), "El productVersionId no es el esperado");
     }
 
-    @Entonces("se le informará que hay campos que no han sido completados, y se pedirá que los complete.")
+    @Then("se le informará que hay campos que no han sido completados, y se pedirá que los complete.")
     public void generacionRechazada() {
-        //Assertions.assertEquals(400, response.getStatusCode(), "Se esperaba un código de estado 400");
-        //Assertions.assertTrue(response.body().asString().contains("Campos incompletos"), "El mensaje de error esperado no fue recibido");
+        // Si falta completar un campo, ese error se manejaria desde el frontend, y nunca se mandaria al backend.
     }
 }
