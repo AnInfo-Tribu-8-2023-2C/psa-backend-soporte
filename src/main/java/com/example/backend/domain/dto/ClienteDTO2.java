@@ -15,5 +15,5 @@ public class ClienteDTO2 {
     @JsonProperty("razon social")
     private String razonSocial;
 
-    private String cuit;
+    private String CUIT;
 }
